@@ -12,6 +12,7 @@ class RVM():
         self.method = method
         self.kernel_type = kernel_type
         self.bias_was_pruned = False
+        self.relevance_vectors = None
 
     def compute_kernel(self, x, y):
         phi = []
@@ -58,8 +59,14 @@ class RVM():
     def compute_log_posterior(self, mean, phi, t, alpha):
         y = self.sigmoid_function_transform(np.dot(phi, mean))
         log_posterior = 0
+        np.seterr(divide = "ignore")
         for c in self.classes:
-            log_posterior = log_posterior + (np.sum(c * np.log(y[t == c]), 0) + np.sum((1 - c) * np.log(1 - y[t == c]), 0))
+            log_y = np.log(y[t == c])
+            log_y[np.isneginf(log_y)] = 0
+            log_1_minus_y = np.log(1 - y[t == c])
+            log_1_minus_y[np.isneginf(log_1_minus_y)] = 0
+            log_posterior = log_posterior + np.sum(c * log_y + (1 - c) * log_1_minus_y)
+        np.seterr(divide = "warn")
         A = np.diag(alpha)
         log_posterior = log_posterior - 0.5 * np.dot((mean).T, np.dot(A, mean))
         #We will minimize -log_posterior instead of maximizing log_posterior.
