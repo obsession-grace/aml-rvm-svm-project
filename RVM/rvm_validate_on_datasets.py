@@ -32,8 +32,9 @@ def get_sample_targets_classification(dataset, train_test, number):
 #-----------------Regression datasets-----------------:
 
 #---------------Classification datasets---------------:
-datasets = ["banana", "breast-cancer"]
-number_of_iterations = 2
+datasets = ["banana", "breast-cancer", "titanic", "waveform", "german"]
+number_of_iterations = 10
+d = []
 result_n_train_samples = []
 result_n_test_samples = []
 result_average_n_relevance_vectors = []
@@ -52,6 +53,8 @@ for dataset in datasets:
         test_samples = get_samples_classification(dataset, "test", iteration+1)
         total_number_of_test_samples = total_number_of_test_samples + len(test_samples)
         test_sample_targets = get_sample_targets_classification(dataset, "test", iteration+1)
+        if iteration == 0:
+            d.append(len(train_samples[0]))
         #Fit the data.
         rvm = RVM(method = "classification", kernel_type = "gaussian")
         rvm.train(train_samples , train_sample_targets)
@@ -68,6 +71,7 @@ for dataset in datasets:
 
 for i in range (len(datasets)):
     print("\nDataset: " + datasets[i])
+    print("d: " + str(d[i]))
     print("Number of '" + datasets[i] + "' datasets: " + str(number_of_iterations))
     print("Number of training samples in each dataset: " + result_n_train_samples[i])
     print("Number of test samples in each dataset: " + result_n_test_samples[i])
