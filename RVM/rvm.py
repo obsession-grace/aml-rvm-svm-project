@@ -123,7 +123,7 @@ class RVM():
                 self.bias_was_pruned = True
 
     def prune_basis_functions(self):
-        infinity = 1000
+        infinity = 10000000
         #Prune all large alpha values
         indices_to_keep = self.alpha < infinity
         #Update parameters
