@@ -27,7 +27,10 @@ def get_relevance_vectors():
     relevance_vectors_y = []
     for relevance_vector in rvm.relevance_vectors:
         relevance_vectors_x.append(relevance_vector[0])
-        relevance_vectors_y.append(np.sin(relevance_vector[0])/relevance_vector[0])
+        for i in range (len(x_samples)):
+            if x_samples[i] == relevance_vector[0]:
+                relevance_vectors_y.append(y_samples[i])
+                break
     return relevance_vectors_x, relevance_vectors_y
 
 #Get samples
@@ -51,16 +54,18 @@ t_predictions = get_predictions(x_input)
 #Get relevance vectors
 relevance_vectors_x, relevance_vectors_y = get_relevance_vectors()
 
+#Plot relevance vectors
+plt.plot(relevance_vectors_x, relevance_vectors_y, 'ko', markersize=10, label="Relevance vector")
+plt.plot(relevance_vectors_x, relevance_vectors_y, 'wo', markersize=6)
+#Plot samples
+plt.plot(x_samples, y_samples, 'ko', markersize=2, label="Sample")
+plt.xlim([x_min, x_max])
 #Plot true function.
 y_true = []
 for x in x_input:
     y_true.append(np.sin(x)/x)
-plt.plot(x_input, y_true, markersize=2)
-#Plot predictive mean
-plt.plot(x_input, t_predictions, markersize=2)
-#Plot samples
-plt.plot(x_samples, y_samples, 'ko', markersize=2)
-plt.xlim([x_min, x_max])
-#Plot relevance vectors
-plt.plot(relevance_vectors_x, relevance_vectors_y, 'ro', markersize=4)
+plt.plot(x_input, y_true, 'r', markersize=2, linestyle=":", label="sinc(x)")
+#Plot predictive mean.
+plt.plot(x_input, t_predictions, 'royalblue', markersize=2, label="Predictive mean")
+plt.legend()
 plt.show()

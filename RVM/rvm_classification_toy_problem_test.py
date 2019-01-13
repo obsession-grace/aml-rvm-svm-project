@@ -61,11 +61,12 @@ rvm.train(data, targets)
 #Get relevance vectors
 relevance_vectors = rvm.relevance_vectors
 print(relevance_vectors)
-#Plot data
-plt.plot(data0_x, data0_y, 'ko', markersize=4)
-plt.plot(data1_x, data1_y, 'bo', markersize=4)
 #Plot relevance vectors
-plt.plot([element[0] for element in relevance_vectors], [element[1] for element in relevance_vectors], 'ro', markersize=4)
+plt.plot([element[0] for element in relevance_vectors], [element[1] for element in relevance_vectors], 'ko', markersize=12, label="Relevance vector")
+plt.plot([element[0] for element in relevance_vectors], [element[1] for element in relevance_vectors], 'wo', markersize=8)
+#Plot data
+plt.plot(data0_x, data0_y, 'ro', markersize=4, label="Class0 sample")
+plt.plot(data1_x, data1_y, 'bo', markersize=4, label="Class1 sample")
 #Plot decision boundary.
 decision_boundary_x = []
 decision_boundary_y = []
@@ -85,7 +86,8 @@ for x in x_axis:
             decision_boundary_y.append(y)
 #print(decision_boundary_x)
 #print(decision_boundary_y)
-plt.plot(decision_boundary_x, decision_boundary_y, 'g')
+plt.plot(decision_boundary_x, decision_boundary_y, 'k', linestyle=":", label="Decision boundary")
 plt.xlim([x_min*1.2, x_max*1.2])
 plt.ylim([y_min*1.2, y_max*1.2])
+plt.legend()
 plt.show()
