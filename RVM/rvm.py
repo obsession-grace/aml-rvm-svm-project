@@ -123,7 +123,7 @@ class RVM():
                 self.bias_was_pruned = True
 
     def prune_basis_functions(self):
-        infinity = 10000000
+        infinity = 1000000000
         #Prune all large alpha values
         indices_to_keep = self.alpha < infinity
         #Update parameters
@@ -133,7 +133,7 @@ class RVM():
 
     def convergence(self, iteration):
         max_number_of_iterations = 5000
-        convergence_criteria = 0.005
+        convergence_criteria = 0.0001
         delta = np.amax(np.absolute(self.previous_alpha - self.alpha))
         if (iteration > 500 and delta < convergence_criteria) or iteration == max_number_of_iterations:
             return True
