@@ -48,9 +48,9 @@ class RVM():
         self.mean = np.zeros(number_of_basis_functions)
         #Initiate alpha as a vector of N+1 hyperparameters
         #self.alpha = self.alpha * np.ones(number_of_basis_functions)
-        self.alpha = 1/number_of_basis_functions * np.ones(number_of_basis_functions)
+        self.alpha = np.ones(number_of_basis_functions)
         #Beta = sigma^-2
-        self.beta = 1/number_of_basis_functions
+        self.beta = 0.000001
 
     def sigmoid_function_transform(self, dot_product):
         #Logistic sigmoid function: 1/(1+np.exp(-np.dot(phi, m)))
