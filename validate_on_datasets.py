@@ -202,5 +202,5 @@ def classification():
             print("Average number of relevance vectors: " + result_average_n_relevance_vectors[i])
             print("Average error (%): " + result_average_error[i])
 
-#regression()
+regression()
 classification()
