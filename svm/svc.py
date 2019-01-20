@@ -168,7 +168,7 @@ class SVC:
 
     def get_number_of_relevance_vectors(self):
         """Get number of support vectors."""
-        return self.sv_idx.size
+        return len(self.sv_idx)
 
     def print_info(self):
         """Show interesting infos."""
