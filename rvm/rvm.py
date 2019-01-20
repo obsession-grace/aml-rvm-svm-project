@@ -380,4 +380,4 @@ class RVM:
 
     def get_number_of_relevance_vectors(self):
         """Get number of support vectors."""
-        return self.relevance_vectors.size
+        return len(self.relevance_vectors)
