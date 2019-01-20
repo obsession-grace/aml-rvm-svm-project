@@ -27,7 +27,7 @@ def get_sinc_data(noise):
     return x_samples, y_samples
 
 def get_boston_housing_data():
-    with open("../datasets/boston_housing.txt") as file:
+    with open("datasets/boston_housing.txt") as file:
         data_lines = file.readlines()
     file.close()
     data_lines = [line.strip() for line in data_lines]
@@ -115,7 +115,7 @@ def regression():
 #---------------Classification datasets---------------
 #-----------------------------------------------------
 def get_samples_classification(dataset, train_test, number):
-    with open("../datasets/" + dataset + "/" + dataset + "_" + train_test + "_data_" + str(number) + ".txt") as file:
+    with open("datasets/" + dataset + "/" + dataset + "_" + train_test + "_data_" + str(number) + ".txt") as file:
         data_lines = file.readlines()
     file.close()
     data_lines = [line.strip() for line in data_lines]
@@ -129,7 +129,7 @@ def get_samples_classification(dataset, train_test, number):
     return np.asarray(samples)
 
 def get_sample_targets_classification(dataset, train_test, number):
-    with open("../datasets/" + dataset + "/" + dataset + "_" + train_test + "_labels_" + str(number) + ".txt") as file:
+    with open("datasets/" + dataset + "/" + dataset + "_" + train_test + "_labels_" + str(number) + ".txt") as file:
         data_lines = file.readlines()
     file.close()
     data_lines = [line.strip() for line in data_lines]
